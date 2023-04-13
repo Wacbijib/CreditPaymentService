@@ -1,23 +1,24 @@
 public class CreditPaymentService {
-    public int calculate(double s, double p, double m) {
-        double i = p / 12 / 100;
-        double p1 = (1 + i);
+    public int calculate(double sumOfCredit, double percentOfCredit, double period) {
+        double monthPercent = percentOfCredit / 12 / 100;
 
-        double k = i * Math.pow(p1, m) / (Math.pow(p1, m) - 1);
+        double element = (1 + monthPercent);
 
-        double a = k * s;
-        return (int) a;
+        double coefficient = monthPercent * Math.pow(element, period) / (Math.pow(element, period) - 1);
+
+        double sumOfPayment = coefficient * sumOfCredit;
+        return (int) sumOfPayment;
 }
 }
 
-// месячная процентная ставка         i = p / 12 / 100
-// коэффициент                        K = i * p1 / (p1 - 1)
-// ежемесячная платеж                 A = K * S
+// i = p / 12 / 100
+// k = i * (1 + i) ⌃m  / ((1 + i) ⌃m - 1)           k = i * p1  / (p
+// a = k * s
 
-// a - сумма платежа
-// k - коэффициент аннуитета
-// s - сумма займа
-
-// p - процентная ставка
-// i - месячная процентная ставка
-// m - количество месяцев
+// a -      sumOfPayment        платеж по кредиту
+// s -      sumOfCredit          сумма займа
+// p -      percentOfCredit     процентная ставка
+// p1-      element
+// m -      period              количество месяцев
+// i -      monthPercent        месячная процентная ставка
+// k -      coefficient         коэффициент
